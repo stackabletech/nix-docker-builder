@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TARGET_DIR="$(dirname "${BASH_SOURCE[0]}")/target"
+SRC_DIR="$(dirname "${BASH_SOURCE[0]}")"
+TARGET_DIR="$SRC_DIR/target"
 KEYS_DIR="$TARGET_DIR/keys"
 MACHINES_FILE="$TARGET_DIR/machines"
 
@@ -37,7 +38,7 @@ else
 fi
 
 echo "==> Building Nix Docker image"
-docker buildx build . --platform linux/amd64 --iidfile "$TARGET_DIR/image-ref"
+docker buildx build "$SRC_DIR" --platform linux/amd64 --iidfile "$TARGET_DIR/image-ref"
 
 echo "==> (Re-)Starting Nix builder container ($CONTAINER_NAME)"
 if docker container inspect "$CONTAINER_NAME" &> /dev/null; then
