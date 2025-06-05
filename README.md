@@ -2,7 +2,7 @@
 
 ## What is it?
 
-It automates (msot of) setting up a Nix remote builder running in a Docker container.
+It automates (most of) setting up a Nix remote builder running in a Docker container.
 
 This is useful for building Linux binaries from a non-Linux host (like macOS/Darwin). You can think of it as roughly equivalent to how Docker Desktop helps you set up Docker in a Linux virtual machine, and then use it as if it was running natively.
 
