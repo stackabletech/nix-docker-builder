@@ -54,7 +54,22 @@ Make sure that the build container (`stackable-nix-docker-builder`) is running. 
 
 If it still doesn't work, check [Configuration](#configuration) for whether anything from it applies to you.
 
+### `dockerTools.streamLayeredImage` builds an invalid script
+
+`streamLayeredImage` creates a script that runs on your native architecture, so you will want to build it using a native Nixpkgs (but grab its contents from the target platform's Nixpkgs). For example:
+
+```nix
+let
+  pkgsLocal = import <nixpkgs> {};
+  pkgsTarget = import <nixpkgs> { targetSystem = "x86_64-unknown-linux-gnu"; };
+in pkgsLocal.dockerTools.streamLayeredImage {
+    name = "my-image";
+    contents = [ pkgsTarget.bashInteractive ];
+}
+```
+
 ## Caveats
 
 - Nix's build sandbox is disabled, so builds will have access to the network.
 - Your machine must be able to connect to the Docker host on port 3022.
+
