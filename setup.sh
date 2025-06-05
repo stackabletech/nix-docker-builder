@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TARGET_DIR="$(pwd)/target"
+TARGET_DIR="$(dirname "${BASH_SOURCE[0]}")/target"
 KEYS_DIR="$TARGET_DIR/keys"
 MACHINES_FILE="$TARGET_DIR/machines"
 
