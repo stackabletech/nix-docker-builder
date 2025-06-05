@@ -10,7 +10,8 @@ SSH_BUILDER_HOST_ALIAS="$CONTAINER_NAME"
 SSH_BUILDER_HOST="${SSH_BUILDER_HOST-127.0.0.1}"
 SSH_BUILDER_PORT=3022
 
-ARCHITECTURE="$(uname -m)"
+# Apple refers to ARM64 as arm64, but Nix calls it aarch64
+ARCHITECTURE="$(uname -m | sed s/arm64/aarch64/)"
 CORE_COUNT="$(getconf _NPROCESSORS_ONLN)"
 
 MUST_RESTART_NIX=0
